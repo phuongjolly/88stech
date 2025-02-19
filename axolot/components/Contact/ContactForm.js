@@ -18,15 +18,6 @@ const ContactForm = () => {
             <div className="col-lg-6 col-md-6">
               <div className="contact-text">
                 <h3>Get in Touch</h3>
-                <p>
-                  Orci varius natoque penatibus et magnis dis parturient montes,
-                  nascetur ridiculus mus. Etiam tempus magna vel turpis pharetra
-                  dictum.
-                </p>
-                <p>
-                  Sed blandit tempus purus, sed sodales leo rutrum vel. Nam
-                  vulputate ipsum ac est congue, eget commodo magna lobortis.
-                </p>
               </div>
             </div>
 

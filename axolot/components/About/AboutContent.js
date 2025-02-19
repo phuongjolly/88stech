@@ -11,43 +11,30 @@ const AboutContent = () => {
               <div className="col-lg-6 col-md-12">
                 <div className="about-content">
                   <h3>
-                    We are branding strategy service from <span>2001</span> for
-                    our customers.
+                  We provide the best services for our customers
                   </h3>
                   <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing
-                    elit, sed do eiusmod tempor incididunt ut labore et dolore
-                    magna aliqua.
+                  Our team specializes in building websites and applications, as well as providing ServiceNow resources.
+                  Backed by highly experienced developers who have worked at prestigious companies like Amazon and Facebook,
+                  we are dedicated to delivering exceptional services to our customers.
                   </p>
                   <ul className="pull-left">
                     <li>
-                      <i className="icofont-ui-check"></i> Creative Design
+                      <i className="icofont-ui-check"></i> Bring Your Idea to Life
                     </li>
                     <li>
-                      <i className="icofont-ui-check"></i> Retina Ready
-                    </li>
-                    <li>
-                      <i className="icofont-ui-check"></i> Responsive Design
-                    </li>
-                    <li>
-                      <i className="icofont-ui-check"></i> Creative Design
+                      <i className="icofont-ui-check"></i> Solutions Consultant
                     </li>
                   </ul>
                   <ul>
                     <li>
-                      <i className="icofont-ui-check"></i> Modern Design
+                      <i className="icofont-ui-check"></i> Delivering Creative Designs
                     </li>
                     <li>
-                      <i className="icofont-ui-check"></i> Awesome Design
+                      <i className="icofont-ui-check"></i> Ensure High-Scale Infrastructure
                     </li>
                     <li>
-                      <i className="icofont-ui-check"></i> Digital Marketing &
-                      Branding
-                    </li>
-                    <li>
-                      <i className="icofont-ui-check"></i> Creative Design
+                      <i className="icofont-ui-check"></i> Offer Permanent Maintenance
                     </li>
                   </ul>
                 </div>
@@ -68,7 +55,7 @@ const AboutContent = () => {
               </div>
             </div>
           </div>
-
+{/*
           <div className="style-border">
             <div className="row mt-100 align-items-center">
               <div className="col-lg-6 col-md-6">
@@ -216,6 +203,7 @@ const AboutContent = () => {
               </div>
             </div>
           </div>
+          */}
         </div>
       </section>
     </>

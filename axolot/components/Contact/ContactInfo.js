@@ -13,10 +13,10 @@ const ContactInfo = () => {
             <div className="content">
               <h4>Phone / Fax</h4>
               <p>
-                <a href="tel:+021245522455">(+021) 245522455</a>
+                <a href="tel:+17782316571">(+1) 7782316571</a>
               </p>
               <p>
-                <a href="tel:+000245522455">(+000) 245522455</a>
+                <a href="tel:+16136188302">(+1) 6136188302</a>
               </p>
             </div>
           </div>
@@ -31,10 +31,10 @@ const ContactInfo = () => {
             <div className="content">
               <h4>E-mail</h4>
               <p>
-                <a href="mailto:info@axolot.com">info@Axolot.com </a>
+                <a href="mailto:@gmail.com">info@88stechnologies.com </a>
               </p>
               <p>
-                <a href="mailto:support@axolot.com">support@Axolot.com</a>
+                <a href="mailto:@gmail.com.com">support@Axolot.com</a>
               </p>
             </div>
           </div>
@@ -49,7 +49,7 @@ const ContactInfo = () => {
             <div className="content">
               <h4>Location</h4>
               <p>
-                2750 Quadra Street , Park Area, <span>Victoria, Canada.</span>
+                1225 Oxbow way,<span>Coquitlam, Canada. &nbsp; &nbsp; &nbsp;</span>
               </p>
             </div>
           </div>
