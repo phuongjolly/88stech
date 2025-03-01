@@ -121,13 +121,6 @@ const Footer = () => {
               <div className="col-lg-7 col-md-7">
                 <p>
                   © 88's Technologies{" "}
-                  <a
-                    href="https://88stechonologies.com/"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    EnvyTheme
-                  </a>
                 </p>
               </div>
 
