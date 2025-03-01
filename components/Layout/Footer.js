@@ -107,7 +107,7 @@ const Footer = () => {
                     <i className="icofont-phone"></i> +1(778) 2316571
                   </li>
                   <li>
-                    <i className="icofont-envelope"></i> support@88tech.com
+                    <i className="icofont-envelope"></i> support@88stechnologies.com
                   </li>
                 </ul>
               </div>
