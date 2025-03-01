@@ -24,28 +24,8 @@ export default function Index2() {
       <MainBanner2 /> 
 
       <AboutUs />
- 
-      {/*<Features />*/}
       
       <ServicesCard />
-
-      {/*<JoinClients2 />
- 
-      <ServicesTab />
-
-      <FunFactsStyle2 />
- 
-      <HowItWorks />*/}
-
-      <TeamSliderStyle2 />
-
-      {/*<TestimonialsSlider />
-
-      <FaqContent />
-
-      <PricingStyle2 />
-
-      <Partners />*/}
 
       <SubscribeForm />
 
