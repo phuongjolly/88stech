@@ -23,7 +23,7 @@ const MainBanner2 = () => {
               <div className="main-banner-content">
                 <h1>Our highlighted in-house product</h1>
                 <p>
-                Hanzi.ca is a collaborative learning website designed to make mastering Chinese writing fun and effective.
+                <a href="https://www.hanzi.ca/?room=F6OY6D">Hanzi.ca</a> is a collaborative learning website designed to make mastering Chinese writing fun and effective.
                 Whether you're a beginner or sharpening your skills, you can join others to explore structured lessons,
                 download writing guides as images or videos, and track your progress in a supportive environment.
                 Learn together, grow together.
