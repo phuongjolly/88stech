@@ -916,8 +916,9 @@ html, body {
     height: 28px !important;
   }
 
-  /* Hide huge speedometer and badge on mobile so text & image fit nicely */
-  .hud-speedometer {
+  /* Hide huge speedometer and badge on mobile hero so text & image fit nicely */
+  .hud-speedometer,
+  .reference-badge-hero {
     display: none !important;
   }
 
@@ -930,8 +931,8 @@ html, body {
   }
 
   .visual-image-layer {
-    max-width: 220px !important;
-    max-height: 220px !important;
+    max-width: 200px !important;
+    max-height: 200px !important;
     margin: 0 auto;
   }
 

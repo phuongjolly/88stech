@@ -197,7 +197,7 @@ export default function SlideHero({ onNext }) {
 
           {/* Reference Badge Callout: Slides UP from BOTTOM */}
           <motion.div 
-            className="position-absolute"
+            className="position-absolute reference-badge-hero"
             initial={{ opacity: 0, y: 60, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.42, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
