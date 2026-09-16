@@ -73,25 +73,43 @@ export default function SlideProducts({ onNext }) {
     }
   ];
 
-  // Auto-switch products on mobile every 5 seconds
+  const [isInteracting, setIsInteracting] = useState(false);
+  const interactionTimerRef = React.useRef(null);
+  const touchStartX = React.useRef(0);
+  const touchStartY = React.useRef(0);
+
+  const resetInteractionTimer = React.useCallback(() => {
+    setIsInteracting(true);
+    if (interactionTimerRef.current) clearTimeout(interactionTimerRef.current);
+    interactionTimerRef.current = setTimeout(() => {
+      setIsInteracting(false);
+    }, 7000);
+  }, []);
+
+  // Auto-switch products on mobile every 5 seconds (pauses on user touch/interaction)
   useEffect(() => {
+    if (isInteracting) return;
     const timer = setInterval(() => {
       setActiveTab((prev) => (prev + 1) % products.length);
     }, 5000);
     return () => clearInterval(timer);
-  }, [products.length]);
-
-  const touchStartX = React.useRef(0);
+  }, [isInteracting, products.length]);
 
   const handleTouchStart = (e) => {
     touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
   };
 
   const handleTouchEnd = (e) => {
     const touchEndX = e.changedTouches[0].clientX;
-    const diff = touchStartX.current - touchEndX;
-    if (Math.abs(diff) > 35) {
-      if (diff > 0) {
+    const touchEndY = e.changedTouches[0].clientY;
+    const diffX = touchStartX.current - touchEndX;
+    const diffY = touchStartY.current - touchEndY;
+
+    // Trigger only if horizontal swipe dominates vertical gesture
+    if (Math.abs(diffX) > 30 && Math.abs(diffX) > Math.abs(diffY)) {
+      resetInteractionTimer();
+      if (diffX > 0) {
         // Swipe left -> Next product
         setActiveTab((prev) => (prev + 1) % products.length);
       } else {
@@ -173,57 +191,53 @@ export default function SlideProducts({ onNext }) {
         </div>
 
         {/* ====================================================
-            MOBILE ONLY: 3D FLIP STACKED CAROUSEL (Swipable)
+            MOBILE ONLY: 3D CAROUSEL PANELS (Swipable)
             ==================================================== */}
         <div 
-          className="d-block d-md-none position-relative w-100 mb-4"
+          className="deck-carousel-container d-block d-md-none mb-3"
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
-          style={{ perspective: 1000, height: 320 }}
+          style={{ height: 325 }}
         >
           {products.map((prod, idx) => {
             const total = products.length;
             let offset = (idx - activeTab) % total;
-            if (offset < 0) offset += total;
+            if (offset > 1) offset -= total;
+            if (offset < -1) offset += total;
 
             const isCurrent = offset === 0;
 
-            let x = 0;
-            let y = 0;
-            let z = 0;
+            // 3D Carousel Coverflow transformation coordinates
+            let x = "0%";
+            let z = 40;
             let rotateY = 0;
-            let rotateX = 0;
             let scale = 1;
             let opacity = 1;
             let zIndex = 10;
 
             if (isCurrent) {
-              x = 0;
-              y = 0;
-              z = 30;
-              rotateY = -12;
-              rotateX = 4;
+              x = "0%";
+              z = 40;
+              rotateY = 0;
               scale = 1;
               opacity = 1;
               zIndex = 10;
             } else if (offset === 1) {
-              x = 26;
-              y = -18;
-              z = -60;
-              rotateY = -18;
-              rotateX = 6;
-              scale = 0.92;
-              opacity = 0.65;
-              zIndex = 6;
-            } else {
-              x = 52;
-              y = -34;
-              z = -130;
-              rotateY = -24;
-              rotateX = 8;
+              // Right card (Next)
+              x = "58%";
+              z = -75;
+              rotateY = -34;
               scale = 0.84;
-              opacity = 0.35;
-              zIndex = 3;
+              opacity = 0.55;
+              zIndex = 5;
+            } else {
+              // Left card (Prev, offset === -1)
+              x = "-58%";
+              z = -75;
+              rotateY = 34;
+              scale = 0.84;
+              opacity = 0.55;
+              zIndex = 5;
             }
 
             return (
@@ -231,32 +245,33 @@ export default function SlideProducts({ onNext }) {
                 key={prod.id}
                 animate={{
                   x,
-                  y,
+                  y: 0,
                   z,
                   rotateY,
-                  rotateX,
                   scale,
-                  opacity
+                  opacity,
+                  zIndex
                 }}
                 transition={{
                   type: "spring",
                   stiffness: 260,
-                  damping: 24,
+                  damping: 26,
                   mass: 0.8
                 }}
-                onClick={() => setActiveTab(idx)}
-                className="deck-3d-card position-absolute w-100 p-3"
+                onClick={() => {
+                  resetInteractionTimer();
+                  setActiveTab(idx);
+                }}
+                className="deck-carousel-card p-3"
                 style={{
-                  top: 15,
-                  left: 0,
-                  zIndex,
-                  transformStyle: "preserve-3d",
-                  cursor: "pointer",
-                  background: "rgba(6, 16, 38, 0.9)",
-                  border: isCurrent ? "2px solid var(--deck-blue-primary)" : "1.5px solid rgba(0, 210, 255, 0.3)",
+                  width: "84%",
+                  left: "8%",
+                  top: 10,
+                  minHeight: 285,
+                  border: isCurrent ? "2px solid var(--deck-blue-primary)" : "1.5px solid rgba(0, 210, 255, 0.25)",
                   boxShadow: isCurrent 
-                    ? "0 20px 45px rgba(0, 210, 255, 0.3), -10px 15px 35px rgba(0,0,0,0.85)" 
-                    : "0 10px 25px rgba(0,0,0,0.7)"
+                    ? "0 20px 45px rgba(0, 210, 255, 0.28), 0 0 25px rgba(0, 210, 255, 0.2), 0 12px 30px rgba(0,0,0,0.9)" 
+                    : "0 10px 25px rgba(0,0,0,0.75)"
                 }}
               >
                 {/* Product Icon & Badge */}
@@ -329,7 +344,11 @@ export default function SlideProducts({ onNext }) {
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="deck-nav-btn d-inline-flex align-items-center gap-2 py-1 px-3"
-                    style={{ textDecoration: "none", fontSize: "0.75rem" }}
+                    style={{ 
+                      textDecoration: "none", 
+                      fontSize: "0.75rem",
+                      pointerEvents: isCurrent ? "auto" : "none"
+                    }}
                   >
                     {prod.isWeb ? <Globe size={13} /> : <Download size={13} />} 
                     {prod.isWeb ? "OPEN WEB APP" : "APP STORE"} 
@@ -346,7 +365,10 @@ export default function SlideProducts({ onNext }) {
           {products.map((_, dotIdx) => (
             <button
               key={dotIdx}
-              onClick={() => setActiveTab(dotIdx)}
+              onClick={() => {
+                resetInteractionTimer();
+                setActiveTab(dotIdx);
+              }}
               style={{
                 width: activeTab === dotIdx ? 24 : 8,
                 height: 8,
@@ -354,7 +376,8 @@ export default function SlideProducts({ onNext }) {
                 background: activeTab === dotIdx ? "var(--deck-blue-primary)" : "rgba(0, 210, 255, 0.25)",
                 border: "none",
                 padding: 0,
-                transition: "all 0.3s ease"
+                transition: "all 0.3s ease",
+                cursor: "pointer"
               }}
               aria-label={`Go to product ${dotIdx + 1}`}
             />

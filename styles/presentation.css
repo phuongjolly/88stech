@@ -934,9 +934,34 @@ html, body {
     gap: 10px !important;
   }
 
-  .deck-3d-card {
+  .deck-grid-cols .deck-3d-card {
     padding: 14px 14px !important;
     transform: none !important;
+  }
+
+  /* Dedicated Mobile 3D Carousel Cards */
+  .deck-carousel-container {
+    position: relative;
+    width: 100%;
+    perspective: 1100px;
+    perspective-origin: 50% 50%;
+    transform-style: preserve-3d;
+    user-select: none;
+    touch-action: pan-y;
+  }
+
+  .deck-carousel-card {
+    position: absolute;
+    top: 0;
+    border-radius: 14px;
+    background: rgba(6, 16, 38, 0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    transform-style: preserve-3d;
+    cursor: pointer;
+    transition: none !important;
+    will-change: transform, opacity;
+    box-sizing: border-box;
   }
 
   .deck-3d-card h3 {
