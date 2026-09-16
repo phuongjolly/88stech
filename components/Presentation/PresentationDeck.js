@@ -194,7 +194,7 @@ export default function PresentationDeck() {
         }}
       />
 
-      {/* Top Navigation Header */}
+      {/* Top Navigation Header (Hidden on mobile) */}
       <header className="deck-nav-header">
         <Link href="/" className="deck-logo">
           88's <span>TECHNOLOGIES</span>
@@ -262,10 +262,12 @@ export default function PresentationDeck() {
           onClick={() => nextSlide(false)}
           style={{ pointerEvents: "auto" }}
         >
-          <div className="deck-mouse-icon">
+          <div className="deck-mouse-icon d-none d-md-block">
             <div className="deck-mouse-wheel" />
           </div>
-          <span className="deck-scroll-text">SCROLL TO EXPLORE</span>
+          <span className="deck-scroll-text">
+            SCROLL TO EXPLORE &darr;
+          </span>
         </div>
       )}
 

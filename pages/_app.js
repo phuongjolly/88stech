@@ -23,7 +23,7 @@ function MyApp({ Component, pageProps }) {
     <>
       <Head>
         <title>88's Technologies | Accelerating The Future</title>
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width, viewport-fit=cover" />
       </Head>
 
       <Component {...pageProps} />

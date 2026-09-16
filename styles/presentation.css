@@ -21,6 +21,7 @@
   position: relative;
   width: 100vw;
   height: 100vh;
+  height: 100dvh;
   overflow: hidden;
   background-color: var(--deck-bg);
   color: #fff;
@@ -844,3 +845,122 @@ html, body {
   width: 100% !important;
   overscroll-behavior: none !important;
 }
+
+/* =========================================================
+   MOBILE & IPHONE RESPONSIVE OPTIMIZATIONS (<= 768px)
+   ========================================================= */
+@media (max-width: 768px) {
+  /* 1. Hide top header completely on mobile to maximize viewport */
+  .deck-nav-header {
+    display: none !important;
+  }
+
+  /* 2. Hide side pagination dots on mobile to avoid overlapping content */
+  .deck-pagination {
+    display: none !important;
+  }
+
+  /* 3. Slide Viewport: adjust padding & allow internal vertical scroll if needed */
+  .deck-slide {
+    padding: 16px 14px 44px 14px !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    align-items: flex-start !important;
+  }
+
+  .deck-slide > div {
+    min-height: 100%;
+    padding-top: 10px;
+    padding-bottom: 20px;
+  }
+
+  /* 4. Make "Scroll To Explore" a tiny line fixed right at the bottom edge */
+  .deck-scroll-explore-hint {
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 6px) !important;
+    gap: 0 !important;
+    padding: 3px 12px !important;
+    background: rgba(4, 10, 24, 0.75) !important;
+    border-radius: 20px !important;
+    border: 1px solid rgba(0, 210, 255, 0.3) !important;
+    backdrop-filter: blur(8px) !important;
+  }
+
+  .deck-mouse-icon {
+    display: none !important;
+  }
+
+  .deck-scroll-text {
+    font-size: 0.65rem !important;
+    letter-spacing: 0.14em !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* 5. Hide bottom footer bar buttons on mobile so scroll hint sits clean */
+  .deck-footer-bar {
+    display: none !important;
+  }
+
+  /* 6. Slide 1 (Hero): Prevent overflow and hide bulky decorative elements */
+  .reference-pointer-container {
+    gap: 0.6rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .reference-pointer-tag {
+    font-size: 2.2rem !important;
+  }
+
+  .reference-arrow-svg {
+    width: 60px !important;
+    height: 28px !important;
+  }
+
+  /* Hide huge speedometer and badge on mobile so text & image fit nicely */
+  .hud-speedometer {
+    display: none !important;
+  }
+
+  .reference-badge-box {
+    padding: 0.4rem 1.2rem !important;
+  }
+
+  .reference-badge-text {
+    font-size: 1.1rem !important;
+  }
+
+  .visual-image-layer {
+    max-width: 220px !important;
+    max-height: 220px !important;
+    margin: 0 auto;
+  }
+
+  /* 7. Slide 2 (Services): 1 column with tighter padding */
+  .deck-grid-cols {
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+
+  .deck-3d-card {
+    padding: 18px 16px !important;
+    transform: none !important;
+  }
+
+  .deck-card-icon {
+    width: 42px !important;
+    height: 42px !important;
+    margin-bottom: 12px !important;
+  }
+
+  /* 8. Slide 3 (Products): Stacked cleanly, compact screenshots */
+  .product-timer-container {
+    margin-top: 6px !important;
+    margin-bottom: 16px !important;
+  }
+
+  /* 9. General typography clamp fix for narrow screens */
+  h2 {
+    font-size: 1.8rem !important;
+  }
+}
+
