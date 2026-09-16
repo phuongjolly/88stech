@@ -118,7 +118,7 @@ export default function SlideProducts({ onNext }) {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div className="d-none d-md-flex align-items-center gap-2 mb-2">
+            <div className="d-flex align-items-center gap-2 mb-2">
               <span className="deck-status-dot" />
               <span style={{ 
                 fontFamily: "var(--deck-font-mono)", 
@@ -444,14 +444,14 @@ export default function SlideProducts({ onNext }) {
                   }}>
                     [{currentProd.category}]
                   </span>
-                  {/* Hide full app title on mobile */}
-                  <h3 className="d-none d-md-block" style={{ fontSize: "1.55rem", fontWeight: 900, color: "#fff", margin: 0 }}>
+                  <h3 style={{ fontSize: "1.55rem", fontWeight: 900, color: "#fff", margin: 0 }}>
                     {currentProd.name}
                   </h3>
                 </div>
               </div>
 
-              <div className="reference-badge-box py-2 px-3 mb-3">
+              {/* Subtitle / Tagline box: "Interactive Canvas for iPad & Apple Pencil", etc. (Hidden on mobile) */}
+              <div className="reference-badge-box py-2 px-3 mb-3 d-none d-md-inline-flex">
                 <span style={{ fontSize: "0.95rem", color: "var(--deck-blue-primary)", fontWeight: 900, letterSpacing: "0.1em" }}>
                   {currentProd.tagline}
                 </span>
