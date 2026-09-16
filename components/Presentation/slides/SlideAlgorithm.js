@@ -9,6 +9,33 @@ export default function SlideServices({ onNext }) {
   const touchStartX = React.useRef(0);
   const touchStartY = React.useRef(0);
 
+  const services = [
+    {
+      id: "01",
+      icon: <Layers size={32} />,
+      title: "SOFTWARE DESIGN & ARCHITECTURE",
+      badge: "CONCEPT TO PROD",
+      desc: "End-to-end architectural blueprints, microservices mapping, and high-concurrency systems engineered for flawless performance.",
+      initialDirection: { opacity: 0, x: -60, y: 30 }
+    },
+    {
+      id: "02",
+      icon: <Smartphone size={32} />,
+      title: "CUSTOM APPS & PLATFORMS",
+      badge: "IOS / WEB / CLOUD",
+      desc: "Full-cycle engineering from mobile apps on the Apple App Store to distributed web platforms and ServiceNow enterprise workflows.",
+      initialDirection: { opacity: 0, y: 70, scale: 0.92 }
+    },
+    {
+      id: "03",
+      icon: <Wrench size={32} />,
+      title: "SYSTEM MAINTENANCE & SCALE",
+      badge: "99.99% UPTIME",
+      desc: "Troubleshooting, code optimization, security hardening, and ongoing infrastructure scaling for mission-critical operations.",
+      initialDirection: { opacity: 0, x: 60, y: 30 }
+    }
+  ];
+
   const resetInteractionTimer = React.useCallback(() => {
     setIsInteracting(true);
     if (interactionTimerRef.current) clearTimeout(interactionTimerRef.current);
