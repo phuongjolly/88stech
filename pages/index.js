@@ -1,35 +1,26 @@
 import React from 'react';
-import MultipageNavbar from '@/components/Layout/MultipageNavbar';
-import MainBanner2 from '@/components/HomePages/MainBanner2';
-import Features from '@/components/Common/Features';
-import AboutUs from '@/components/Common/AboutUs';
-import ServicesCard from '@/components/Common/ServicesCard';
-import ServicesTab from '@/components/Common/ServicesTab';
-import FunFactsStyle2 from '@/components/Common/FunFactsStyle2';
-import JoinClients2 from '@/components/Common/JoinClients2';
-import HowItWorks from '@/components/Common/HowItWorks';
-import TeamSliderStyle2 from '@/components/Common/TeamSliderStyle2';
-import TestimonialsSlider from '@/components/Common/TestimonialsSlider';
-import FaqContent from '@/components/Common/FaqContent';
-import PricingStyle2 from '@/components/Common/PricingStyle2';
-import Partners from '@/components/Common/Partners';
-import SubscribeForm from '@/components/Common/SubscribeForm';
-import Footer from '@/components/Layout/Footer';
- 
-export default function Index2() {
-  return (
-    <>
-      <MultipageNavbar />
+import dynamic from 'next/dynamic';
 
-      <MainBanner2 /> 
-
-      <AboutUs />
-      
-      <ServicesCard />
-
-      <SubscribeForm />
-
-      <Footer />
-    </>
+// Dynamically import PresentationDeck with SSR disabled for clean client-side wheel and 3D animations
+const PresentationDeck = dynamic(() => import('@/components/Presentation/PresentationDeck'), {
+  ssr: false,
+  loading: () => (
+    <div style={{
+      width: '100vw',
+      height: '100vh',
+      backgroundColor: '#040814',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      color: '#00d2ff',
+      fontFamily: 'monospace',
+      letterSpacing: '0.2em'
+    }}>
+      INITIALIZING ENGINE...
+    </div>
   )
+});
+
+export default function Index() {
+  return <PresentationDeck />;
 }

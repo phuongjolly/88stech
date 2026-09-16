@@ -10,6 +10,7 @@ import "react-accessible-accordion/dist/fancy-example.css";
 // Global Styles
 import "../styles/style.css";
 import "../styles/responsive.css";
+import "../styles/presentation.css";
 
 import Head from "next/head";
 import ScrollToTop from "@/components/Layout/ScrollToTop";
@@ -21,9 +22,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head>
-        <title>
-          88's Technologies
-        </title>
+        <title>88's Technologies | Accelerating The Future</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
 
