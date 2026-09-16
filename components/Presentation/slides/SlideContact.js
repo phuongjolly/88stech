@@ -39,16 +39,23 @@ export default function SlideContact() {
             </span>
           </div>
 
-          <h2 style={{ 
-            fontSize: "clamp(2rem, 3.8vw, 3.2rem)", 
-            fontWeight: 900, 
-            color: "#fff", 
-            marginBottom: "6px",
-            lineHeight: 1.2
-          }}>
+          {/* Desktop Title & Subtitle (Hidden on mobile) */}
+          <h2 
+            className="d-none d-md-block"
+            style={{ 
+              fontSize: "clamp(2rem, 3.8vw, 3.2rem)", 
+              fontWeight: 900, 
+              color: "#fff", 
+              marginBottom: "6px",
+              lineHeight: 1.2
+            }}
+          >
             LET'S BUILD SOMETHING GREAT
           </h2>
-          <p style={{ color: "var(--deck-text-muted)", fontSize: "0.98rem", maxWidth: 580, margin: "0 auto" }}>
+          <p 
+            className="d-none d-md-block"
+            style={{ color: "var(--deck-text-muted)", fontSize: "0.98rem", maxWidth: 580, margin: "0 auto" }}
+          >
             Whether you need a custom mobile app, high-concurrency cloud architecture, or engineering consultation.
           </p>
         </motion.div>

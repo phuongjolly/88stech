@@ -110,7 +110,7 @@ export default function SlideHero({ onNext }) {
             </motion.p>
 
             <motion.div 
-              className="d-flex flex-wrap gap-2 mb-4"
+              className="d-none d-md-flex flex-wrap gap-2 mb-4"
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.35, delay: 0.22 }}

@@ -73,39 +73,19 @@ export default function SlideProducts({ onNext }) {
     }
   ];
 
-  // 15 seconds auto-switch timer with progress bar
-  useEffect(() => {
-    const duration = 15000;
-    const intervalTime = 100;
-    const step = (intervalTime / duration) * 100;
-
-    const timer = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          setActiveTab((cur) => (cur + 1) % products.length);
-          return 0;
-        }
-        return prev + step;
-      });
-    }, intervalTime);
-
-    return () => clearInterval(timer);
-  }, [activeTab, products.length]);
-
+  // No auto-rotate on any layout (static control)
   const handleSelectTab = (idx) => {
     setActiveTab(idx);
-    setProgress(0);
   };
 
   const currentProd = products[activeTab];
-  const timeLeftSec = Math.max(0, Math.ceil((15 * (100 - progress)) / 100));
 
   return (
     <div className="container-fluid h-100 d-flex align-items-center justify-content-center">
       <div className="w-100" style={{ maxWidth: 1320 }}>
         
         {/* Header with multi-directional animation */}
-        <div className="d-flex flex-column flex-md-row align-items-md-end justify-content-between mb-4 gap-3">
+        <div className="d-flex flex-column flex-md-row align-items-md-end justify-content-between mb-3 mb-md-4 gap-3">
           <motion.div
             initial={{ opacity: 0, x: -60 }}
             animate={{ opacity: 1, x: 0 }}
@@ -133,13 +113,15 @@ export default function SlideProducts({ onNext }) {
             </h2>
           </motion.div>
 
+          {/* Tab Selector: Full names on desktop, clean dots/indicators on mobile */}
           <motion.div 
             className="d-flex flex-column align-items-md-end gap-2"
             initial={{ opacity: 0, x: 60 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.38, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div className="d-flex flex-wrap align-items-center gap-2">
+            {/* Desktop Tabs: Show Full App Names */}
+            <div className="d-none d-md-flex flex-wrap align-items-center gap-2">
               {products.map((p, idx) => (
                 <button
                   key={p.id}
@@ -162,32 +144,60 @@ export default function SlideProducts({ onNext }) {
               ))}
             </div>
 
-            {/* 15s Timer Progress readout */}
-            <div className="d-flex align-items-center gap-2" style={{ fontFamily: "var(--deck-font-mono)", fontSize: "0.75rem", color: "var(--deck-text-muted)" }}>
-              <span>AUTO-ROTATE:</span>
-              <span style={{ color: "var(--deck-blue-primary)", fontWeight: 700 }}>{timeLeftSec}s</span>
+            {/* Mobile Tabs: Clean Indicators & Dots only */}
+            <div className="d-flex d-md-none align-items-center gap-2">
+              {products.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => handleSelectTab(idx)}
+                  style={{
+                    width: activeTab === idx ? 28 : 10,
+                    height: 10,
+                    borderRadius: 5,
+                    background: activeTab === idx ? "var(--deck-blue-primary)" : "rgba(0, 210, 255, 0.25)",
+                    border: "none",
+                    padding: 0,
+                    transition: "all 0.3s ease"
+                  }}
+                  aria-label={`Select product ${idx + 1}`}
+                />
+              ))}
             </div>
           </motion.div>
         </div>
 
         {/* Product Showcase Card */}
         <div 
-          className="deck-3d-card p-4 p-lg-5"
+          className="deck-3d-card p-3 p-md-4 p-lg-5"
           style={{
             background: "rgba(6, 16, 38, 0.85)",
             border: "2px solid rgba(0, 210, 255, 0.35)",
             boxShadow: "0 20px 60px rgba(0, 0, 0, 0.8), 0 0 35px rgba(0, 210, 255, 0.2)"
           }}
         >
-          {/* Top 15s Progress Bar */}
-          <div className="product-timer-container mb-4">
+          {/* Small progress line for active item */}
+          <div 
+            style={{
+              width: "100%",
+              height: 3,
+              background: "rgba(0, 210, 255, 0.15)",
+              borderRadius: 2,
+              overflow: "hidden",
+              marginBottom: 16
+            }}
+          >
             <div 
-              className="product-timer-fill" 
-              style={{ width: `${progress}%` }} 
+              style={{
+                width: `${((activeTab + 1) / products.length) * 100}%`,
+                height: "100%",
+                background: "linear-gradient(90deg, #0055ff, var(--deck-blue-primary))",
+                boxShadow: "0 0 8px var(--deck-blue-primary)",
+                transition: "width 0.35s ease"
+              }}
             />
           </div>
 
-          <div className="row align-items-center g-4">
+          <div className="row align-items-center g-3 g-md-4">
             
             {/* Left: App Info & Highlights enters from LEFT */}
             <motion.div 
@@ -237,7 +247,8 @@ export default function SlideProducts({ onNext }) {
                   }}>
                     [{currentProd.category}]
                   </span>
-                  <h3 style={{ fontSize: "1.55rem", fontWeight: 900, color: "#fff", margin: 0 }}>
+                  {/* Hide full app title on mobile */}
+                  <h3 className="d-none d-md-block" style={{ fontSize: "1.55rem", fontWeight: 900, color: "#fff", margin: 0 }}>
                     {currentProd.name}
                   </h3>
                 </div>

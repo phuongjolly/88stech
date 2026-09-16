@@ -10,6 +10,19 @@ import { ChevronUp, ChevronDown } from "lucide-react";
 
 export default function PresentationDeck() {
   const [currentSlide, setCurrentSlide] = useState(0);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const urlParams = new URLSearchParams(window.location.search);
+      const slideParam = urlParams.get("slide");
+      if (slideParam !== null) {
+        const parsed = parseInt(slideParam, 10);
+        if (!isNaN(parsed) && parsed >= 0 && parsed < 4) {
+          setCurrentSlide(parsed);
+        }
+      }
+    }
+  }, []);
   const [direction, setDirection] = useState(1);
   const [isScrollingGlow, setIsScrollingGlow] = useState(false);
   const [mousePos, setMousePos] = useState({ x: -100, y: -100 });
@@ -241,7 +254,7 @@ export default function PresentationDeck() {
 
       {/* Main Slide Carousel Viewport */}
       <main className="deck-slides-viewport" style={{ perspective: 1200 }}>
-        <AnimatePresence initial={false} custom={direction} mode="wait">
+        <AnimatePresence initial={false} custom={direction}>
           <motion.div
             key={currentSlide}
             custom={direction}
