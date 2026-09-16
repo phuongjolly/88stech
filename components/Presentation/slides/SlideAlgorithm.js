@@ -131,7 +131,7 @@ export default function SlideServices({ onNext }) {
           className="deck-carousel-container d-block d-md-none mb-3"
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
-          style={{ height: 280 }}
+          style={{ height: 300 }}
         >
           {services.map((item, idx) => {
             const total = services.length;
@@ -158,18 +158,18 @@ export default function SlideServices({ onNext }) {
               zIndex = 10;
             } else if (offset === 1) {
               // Right card (Next)
-              x = "58%";
+              x = "60%";
               z = -75;
-              rotateY = -34;
-              scale = 0.84;
+              rotateY = -32;
+              scale = 0.85;
               opacity = 0.55;
               zIndex = 5;
             } else {
               // Left card (Prev, offset === -1)
-              x = "-58%";
+              x = "-60%";
               z = -75;
-              rotateY = 34;
-              scale = 0.84;
+              rotateY = 32;
+              scale = 0.85;
               opacity = 0.55;
               zIndex = 5;
             }
@@ -196,12 +196,13 @@ export default function SlideServices({ onNext }) {
                   resetInteractionTimer();
                   setActiveIdx(idx);
                 }}
-                className="deck-carousel-card p-3"
+                className="deck-carousel-card"
                 style={{
-                  width: "82%",
-                  left: "9%",
-                  top: 10,
-                  minHeight: 250,
+                  width: "88%",
+                  left: "6%",
+                  top: 8,
+                  minHeight: 270,
+                  padding: "16px 18px",
                   border: isCurrent 
                     ? "2px solid var(--deck-blue-primary)" 
                     : "1.5px solid rgba(0, 210, 255, 0.25)",
@@ -211,12 +212,12 @@ export default function SlideServices({ onNext }) {
                 }}
               >
                 <div className="d-flex align-items-center justify-content-between mb-2">
-                  <div className="deck-card-icon mb-0" style={{ width: 38, height: 38, borderRadius: 8 }}>
+                  <div className="deck-card-icon mb-0" style={{ width: 44, height: 44, borderRadius: 10 }}>
                     {item.icon}
                   </div>
                   <span style={{ 
                     fontFamily: "var(--deck-font-mono)", 
-                    fontSize: "1.1rem", 
+                    fontSize: "1.15rem", 
                     fontWeight: 900, 
                     color: isCurrent ? "var(--deck-blue-primary)" : "rgba(0, 210, 255, 0.45)" 
                   }}>
@@ -227,7 +228,7 @@ export default function SlideServices({ onNext }) {
                 <span style={{
                   fontFamily: "var(--deck-font-mono)",
                   color: "var(--deck-blue-bright)",
-                  fontSize: "0.72rem",
+                  fontSize: "0.76rem",
                   letterSpacing: "0.15em",
                   fontWeight: 700,
                   display: "block",
@@ -237,16 +238,16 @@ export default function SlideServices({ onNext }) {
                 </span>
 
                 <h3 style={{ 
-                  fontSize: "1.02rem", 
+                  fontSize: "1.08rem", 
                   fontWeight: 800, 
                   color: "#fff", 
-                  marginBottom: "6px",
-                  lineHeight: 1.25
+                  marginBottom: "8px",
+                  lineHeight: 1.28
                 }}>
                   {item.title}
                 </h3>
 
-                <p style={{ color: "var(--deck-text-muted)", fontSize: "0.82rem", lineHeight: 1.45, margin: 0 }}>
+                <p style={{ color: "var(--deck-text-muted)", fontSize: "0.86rem", lineHeight: 1.5, margin: 0 }}>
                   {item.desc}
                 </p>
               </motion.div>

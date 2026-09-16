@@ -8,26 +8,6 @@ export default function SlideProducts({ onNext }) {
 
   const products = [
     {
-      id: "hanzi-ca",
-      name: "Hanzi.ca – Practice Writing Chinese",
-      tagline: "Interactive Canvas for iPad & Apple Pencil",
-      category: "Web App // Chinese Calligraphy & Handwriting",
-      url: "https://www.hanzi.ca",
-      isWeb: true,
-      icon: "https://www.hanzi.ca/og-image.png",
-      badges: ["WEB APP", "IPAD & PENCIL OPTIMIZED", "FREE"],
-      screenshots: [
-        "https://www.hanzi.ca/og-image.png"
-      ],
-      highlights: [
-        "Natural handwriting canvas tuned for Apple Pencil pressure & tilt",
-        "Interactive stroke guides with Mi-grid (米字格) & Tian-grid (田字格)",
-        "Authentic calligraphy fonts: Noto Serif SC, Ma Shan Zheng & Long Cang",
-        "Realtime canvas export, stroke animation playback, and collaboration"
-      ],
-      badge: "CREATIVE EDTECH"
-    },
-    {
       id: "momo-hsk",
       name: "Momo: Learn Chinese - HSK Prep",
       tagline: "Widget, Flashcards & Radicals (HSK 3.0)",
@@ -70,6 +50,26 @@ export default function SlideProducts({ onNext }) {
         "Playful Momo mascot animations with polished haptic feedback"
       ],
       badge: "INTERACTIVE GAMING"
+    },
+    {
+      id: "hanzi-ca",
+      name: "Hanzi.ca – Practice Writing Chinese",
+      tagline: "Interactive Canvas for iPad & Apple Pencil",
+      category: "Web App // Chinese Calligraphy & Handwriting",
+      url: "https://www.hanzi.ca",
+      isWeb: true,
+      icon: "https://www.hanzi.ca/og-image.png",
+      badges: ["WEB APP", "IPAD & PENCIL OPTIMIZED", "FREE"],
+      screenshots: [
+        "https://www.hanzi.ca/og-image.png"
+      ],
+      highlights: [
+        "Natural handwriting canvas tuned for Apple Pencil pressure & tilt",
+        "Interactive stroke guides with Mi-grid (米字格) & Tian-grid (田字格)",
+        "Authentic calligraphy fonts: Noto Serif SC, Ma Shan Zheng & Long Cang",
+        "Realtime canvas export, stroke animation playback, and collaboration"
+      ],
+      badge: "CREATIVE EDTECH"
     }
   ];
 
@@ -197,7 +197,7 @@ export default function SlideProducts({ onNext }) {
           className="deck-carousel-container d-block d-md-none mb-3"
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
-          style={{ height: 325 }}
+          style={{ height: 355 }}
         >
           {products.map((prod, idx) => {
             const total = products.length;
@@ -224,18 +224,18 @@ export default function SlideProducts({ onNext }) {
               zIndex = 10;
             } else if (offset === 1) {
               // Right card (Next)
-              x = "58%";
+              x = "60%";
               z = -75;
-              rotateY = -34;
-              scale = 0.84;
+              rotateY = -32;
+              scale = 0.85;
               opacity = 0.55;
               zIndex = 5;
             } else {
               // Left card (Prev, offset === -1)
-              x = "-58%";
+              x = "-60%";
               z = -75;
-              rotateY = 34;
-              scale = 0.84;
+              rotateY = 32;
+              scale = 0.85;
               opacity = 0.55;
               zIndex = 5;
             }
@@ -262,12 +262,13 @@ export default function SlideProducts({ onNext }) {
                   resetInteractionTimer();
                   setActiveTab(idx);
                 }}
-                className="deck-carousel-card p-3"
+                className="deck-carousel-card"
                 style={{
-                  width: "84%",
-                  left: "8%",
-                  top: 10,
-                  minHeight: 285,
+                  width: "88%",
+                  left: "6%",
+                  top: 8,
+                  minHeight: 315,
+                  padding: "16px 18px",
                   border: isCurrent ? "2px solid var(--deck-blue-primary)" : "1.5px solid rgba(0, 210, 255, 0.25)",
                   boxShadow: isCurrent 
                     ? "0 20px 45px rgba(0, 210, 255, 0.28), 0 0 25px rgba(0, 210, 255, 0.2), 0 12px 30px rgba(0,0,0,0.9)" 
@@ -279,9 +280,9 @@ export default function SlideProducts({ onNext }) {
                   <div className="d-flex align-items-center gap-2">
                     <div 
                       style={{
-                        width: 44,
-                        height: 44,
-                        borderRadius: 10,
+                        width: 48,
+                        height: 48,
+                        borderRadius: 12,
                         overflow: "hidden",
                         border: "1.5px solid var(--deck-blue-primary)",
                         backgroundColor: "#070e20",
@@ -304,14 +305,14 @@ export default function SlideProducts({ onNext }) {
                     <div>
                       <span style={{ 
                         fontFamily: "var(--deck-font-mono)", 
-                        fontSize: "0.68rem", 
+                        fontSize: "0.72rem", 
                         color: "var(--deck-blue-bright)",
                         letterSpacing: "0.12em",
                         textTransform: "uppercase"
                       }}>
                         [{prod.badges[0]}]
                       </span>
-                      <h4 style={{ fontSize: "0.95rem", fontWeight: 800, color: "#fff", margin: 0 }}>
+                      <h4 style={{ fontSize: "1.02rem", fontWeight: 800, color: "#fff", margin: 0 }}>
                         {prod.id === "hanzi-ca" ? "Hanzi.ca" : prod.id === "momo-hsk" ? "Momo: HSK Prep" : "Momo: Block Puzzle"}
                       </h4>
                     </div>
@@ -319,7 +320,7 @@ export default function SlideProducts({ onNext }) {
 
                   <span style={{ 
                     fontFamily: "var(--deck-font-mono)", 
-                    fontSize: "1.1rem", 
+                    fontSize: "1.15rem", 
                     fontWeight: 900, 
                     color: isCurrent ? "var(--deck-blue-primary)" : "rgba(0, 210, 255, 0.45)" 
                   }}>
@@ -328,10 +329,10 @@ export default function SlideProducts({ onNext }) {
                 </div>
 
                 {/* Highlights (Only 2 bullet points on mobile for cleanliness) */}
-                <ul style={{ listStyle: "none", padding: 0, margin: "10px 0" }}>
+                <ul style={{ listStyle: "none", padding: 0, margin: "12px 0" }}>
                   {prod.highlights.slice(0, 2).map((h, hIdx) => (
-                    <li key={hIdx} className="d-flex align-items-start gap-2 mb-1" style={{ color: "var(--deck-text-muted)", fontSize: "0.8rem", lineHeight: 1.35 }}>
-                      <Check size={14} color="var(--deck-blue-primary)" style={{ flexShrink: 0, marginTop: 2 }} />
+                    <li key={hIdx} className="d-flex align-items-start gap-2 mb-2" style={{ color: "var(--deck-text-muted)", fontSize: "0.85rem", lineHeight: 1.45 }}>
+                      <Check size={15} color="var(--deck-blue-primary)" style={{ flexShrink: 0, marginTop: 2 }} />
                       <span>{h}</span>
                     </li>
                   ))}
@@ -346,13 +347,13 @@ export default function SlideProducts({ onNext }) {
                     className="deck-nav-btn d-inline-flex align-items-center gap-2 py-1 px-3"
                     style={{ 
                       textDecoration: "none", 
-                      fontSize: "0.75rem",
+                      fontSize: "0.78rem",
                       pointerEvents: isCurrent ? "auto" : "none"
                     }}
                   >
-                    {prod.isWeb ? <Globe size={13} /> : <Download size={13} />} 
+                    {prod.isWeb ? <Globe size={14} /> : <Download size={14} />} 
                     {prod.isWeb ? "OPEN WEB APP" : "APP STORE"} 
-                    <ExternalLink size={12} />
+                    <ExternalLink size={13} />
                   </a>
                 </div>
               </motion.div>
