@@ -73,7 +73,34 @@ export default function SlideProducts({ onNext }) {
     }
   ];
 
-  // No auto-rotate on any layout (static control)
+  // Auto-switch products on mobile every 5 seconds
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveTab((prev) => (prev + 1) % products.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [products.length]);
+
+  const touchStartX = React.useRef(0);
+
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e) => {
+    const touchEndX = e.changedTouches[0].clientX;
+    const diff = touchStartX.current - touchEndX;
+    if (Math.abs(diff) > 35) {
+      if (diff > 0) {
+        // Swipe left -> Next product
+        setActiveTab((prev) => (prev + 1) % products.length);
+      } else {
+        // Swipe right -> Prev product
+        setActiveTab((prev) => (prev - 1 + products.length) % products.length);
+      }
+    }
+  };
+
   const handleSelectTab = (idx) => {
     setActiveTab(idx);
   };
@@ -91,7 +118,7 @@ export default function SlideProducts({ onNext }) {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div className="d-flex align-items-center gap-2 mb-2">
+            <div className="d-none d-md-flex align-items-center gap-2 mb-2">
               <span className="deck-status-dot" />
               <span style={{ 
                 fontFamily: "var(--deck-font-mono)", 
@@ -113,15 +140,14 @@ export default function SlideProducts({ onNext }) {
             </h2>
           </motion.div>
 
-          {/* Tab Selector: Full names on desktop, clean dots/indicators on mobile */}
+          {/* Desktop Tabs: Show Full App Names */}
           <motion.div 
-            className="d-flex flex-column align-items-md-end gap-2"
+            className="d-none d-md-flex flex-column align-items-md-end gap-2"
             initial={{ opacity: 0, x: 60 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.38, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
           >
-            {/* Desktop Tabs: Show Full App Names */}
-            <div className="d-none d-md-flex flex-wrap align-items-center gap-2">
+            <div className="d-flex flex-wrap align-items-center gap-2">
               {products.map((p, idx) => (
                 <button
                   key={p.id}
@@ -143,39 +169,210 @@ export default function SlideProducts({ onNext }) {
                 </button>
               ))}
             </div>
-
-            {/* Mobile Tabs: Clean Indicators & Dots only */}
-            <div className="d-flex d-md-none align-items-center gap-2">
-              {products.map((_, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => handleSelectTab(idx)}
-                  style={{
-                    width: activeTab === idx ? 28 : 10,
-                    height: 10,
-                    borderRadius: 5,
-                    background: activeTab === idx ? "var(--deck-blue-primary)" : "rgba(0, 210, 255, 0.25)",
-                    border: "none",
-                    padding: 0,
-                    transition: "all 0.3s ease"
-                  }}
-                  aria-label={`Select product ${idx + 1}`}
-                />
-              ))}
-            </div>
           </motion.div>
         </div>
 
-        {/* Product Showcase Card */}
+        {/* ====================================================
+            MOBILE ONLY: 3D FLIP STACKED CAROUSEL (Swipable)
+            ==================================================== */}
         <div 
-          className="deck-3d-card p-3 p-md-4 p-lg-5"
+          className="d-block d-md-none position-relative w-100 mb-4"
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+          style={{ perspective: 1000, height: 320 }}
+        >
+          {products.map((prod, idx) => {
+            const total = products.length;
+            let offset = (idx - activeTab) % total;
+            if (offset < 0) offset += total;
+
+            const isCurrent = offset === 0;
+
+            let x = 0;
+            let y = 0;
+            let z = 0;
+            let rotateY = 0;
+            let rotateX = 0;
+            let scale = 1;
+            let opacity = 1;
+            let zIndex = 10;
+
+            if (isCurrent) {
+              x = 0;
+              y = 0;
+              z = 30;
+              rotateY = -12;
+              rotateX = 4;
+              scale = 1;
+              opacity = 1;
+              zIndex = 10;
+            } else if (offset === 1) {
+              x = 26;
+              y = -18;
+              z = -60;
+              rotateY = -18;
+              rotateX = 6;
+              scale = 0.92;
+              opacity = 0.65;
+              zIndex = 6;
+            } else {
+              x = 52;
+              y = -34;
+              z = -130;
+              rotateY = -24;
+              rotateX = 8;
+              scale = 0.84;
+              opacity = 0.35;
+              zIndex = 3;
+            }
+
+            return (
+              <motion.div
+                key={prod.id}
+                animate={{
+                  x,
+                  y,
+                  z,
+                  rotateY,
+                  rotateX,
+                  scale,
+                  opacity
+                }}
+                transition={{
+                  type: "spring",
+                  stiffness: 260,
+                  damping: 24,
+                  mass: 0.8
+                }}
+                onClick={() => setActiveTab(idx)}
+                className="deck-3d-card position-absolute w-100 p-3"
+                style={{
+                  top: 15,
+                  left: 0,
+                  zIndex,
+                  transformStyle: "preserve-3d",
+                  cursor: "pointer",
+                  background: "rgba(6, 16, 38, 0.9)",
+                  border: isCurrent ? "2px solid var(--deck-blue-primary)" : "1.5px solid rgba(0, 210, 255, 0.3)",
+                  boxShadow: isCurrent 
+                    ? "0 20px 45px rgba(0, 210, 255, 0.3), -10px 15px 35px rgba(0,0,0,0.85)" 
+                    : "0 10px 25px rgba(0,0,0,0.7)"
+                }}
+              >
+                {/* Product Icon & Badge */}
+                <div className="d-flex align-items-center justify-content-between mb-2">
+                  <div className="d-flex align-items-center gap-2">
+                    <div 
+                      style={{
+                        width: 44,
+                        height: 44,
+                        borderRadius: 10,
+                        overflow: "hidden",
+                        border: "1.5px solid var(--deck-blue-primary)",
+                        backgroundColor: "#070e20",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        flexShrink: 0
+                      }}
+                    >
+                      <img 
+                        src={prod.icon} 
+                        alt={prod.name} 
+                        style={{ width: "100%", height: "100%", objectFit: prod.isWeb ? "cover" : "contain" }}
+                        onError={(e) => {
+                          e.target.style.display = 'none';
+                          e.target.parentNode.innerHTML = '<span style="color:#00d2ff;font-weight:900;font-size:1.1rem">88</span>';
+                        }}
+                      />
+                    </div>
+                    <div>
+                      <span style={{ 
+                        fontFamily: "var(--deck-font-mono)", 
+                        fontSize: "0.68rem", 
+                        color: "var(--deck-blue-bright)",
+                        letterSpacing: "0.12em",
+                        textTransform: "uppercase"
+                      }}>
+                        [{prod.badges[0]}]
+                      </span>
+                      <h4 style={{ fontSize: "0.95rem", fontWeight: 800, color: "#fff", margin: 0 }}>
+                        {prod.id === "hanzi-ca" ? "Hanzi.ca" : prod.id === "momo-hsk" ? "Momo: HSK Prep" : "Momo: Block Puzzle"}
+                      </h4>
+                    </div>
+                  </div>
+
+                  <span style={{ 
+                    fontFamily: "var(--deck-font-mono)", 
+                    fontSize: "1.1rem", 
+                    fontWeight: 900, 
+                    color: isCurrent ? "var(--deck-blue-primary)" : "rgba(0, 210, 255, 0.45)" 
+                  }}>
+                    0{idx + 1} / 03
+                  </span>
+                </div>
+
+                {/* Highlights (Only 2 bullet points on mobile for cleanliness) */}
+                <ul style={{ listStyle: "none", padding: 0, margin: "10px 0" }}>
+                  {prod.highlights.slice(0, 2).map((h, hIdx) => (
+                    <li key={hIdx} className="d-flex align-items-start gap-2 mb-1" style={{ color: "var(--deck-text-muted)", fontSize: "0.8rem", lineHeight: 1.35 }}>
+                      <Check size={14} color="var(--deck-blue-primary)" style={{ flexShrink: 0, marginTop: 2 }} />
+                      <span>{h}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                {/* Direct Action Link */}
+                <div className="mt-2 pt-2" style={{ borderTop: "1px solid rgba(0, 210, 255, 0.15)" }}>
+                  <a 
+                    href={prod.url} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="deck-nav-btn d-inline-flex align-items-center gap-2 py-1 px-3"
+                    style={{ textDecoration: "none", fontSize: "0.75rem" }}
+                  >
+                    {prod.isWeb ? <Globe size={13} /> : <Download size={13} />} 
+                    {prod.isWeb ? "OPEN WEB APP" : "APP STORE"} 
+                    <ExternalLink size={12} />
+                  </a>
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
+
+        {/* Mobile Product Indicator Dots */}
+        <div className="d-flex d-md-none justify-content-center align-items-center gap-2 mb-3">
+          {products.map((_, dotIdx) => (
+            <button
+              key={dotIdx}
+              onClick={() => setActiveTab(dotIdx)}
+              style={{
+                width: activeTab === dotIdx ? 24 : 8,
+                height: 8,
+                borderRadius: 4,
+                background: activeTab === dotIdx ? "var(--deck-blue-primary)" : "rgba(0, 210, 255, 0.25)",
+                border: "none",
+                padding: 0,
+                transition: "all 0.3s ease"
+              }}
+              aria-label={`Go to product ${dotIdx + 1}`}
+            />
+          ))}
+        </div>
+
+        {/* ====================================================
+            DESKTOP ONLY: FULL SHOWCASE CARD WITH BROWSER/MOCKUPS
+            ==================================================== */}
+        <div 
+          className="deck-3d-card p-4 p-lg-5 d-none d-md-block"
           style={{
             background: "rgba(6, 16, 38, 0.85)",
             border: "2px solid rgba(0, 210, 255, 0.35)",
             boxShadow: "0 20px 60px rgba(0, 0, 0, 0.8), 0 0 35px rgba(0, 210, 255, 0.2)"
           }}
         >
-          {/* Small progress line for active item */}
+          {/* Desktop Progress Bar */}
           <div 
             style={{
               width: "100%",

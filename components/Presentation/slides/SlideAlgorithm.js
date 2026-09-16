@@ -33,6 +33,14 @@ export default function SlideServices({ onNext }) {
     }
   ];
 
+  // Auto-switch card on mobile every 4.5 seconds
+  React.useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveIdx((prev) => (prev + 1) % services.length);
+    }, 4500);
+    return () => clearInterval(timer);
+  }, [services.length]);
+
   const handleTouchStart = (e) => {
     touchStartX.current = e.touches[0].clientX;
   };
@@ -40,12 +48,12 @@ export default function SlideServices({ onNext }) {
   const handleTouchEnd = (e) => {
     const touchEndX = e.changedTouches[0].clientX;
     const diff = touchStartX.current - touchEndX;
-    if (Math.abs(diff) > 40) {
+    if (Math.abs(diff) > 35) {
       if (diff > 0) {
-        // Next card
+        // Swipe left -> Next card
         setActiveIdx((prev) => (prev + 1) % services.length);
       } else {
-        // Prev card
+        // Swipe right -> Prev card
         setActiveIdx((prev) => (prev - 1 + services.length) % services.length);
       }
     }
@@ -108,60 +116,82 @@ export default function SlideServices({ onNext }) {
           style={{ perspective: 1000, height: 260 }}
         >
           {services.map((item, idx) => {
-            const isCurrent = idx === activeIdx;
-            const isNext = idx === (activeIdx + 1) % services.length;
-            const isPrevious = idx === (activeIdx + 2) % services.length;
+            const total = services.length;
+            // Position relative to activeIdx (-1, 0, 1, etc.)
+            let offset = (idx - activeIdx) % total;
+            if (offset < 0) offset += total;
 
-            let translateY = 0;
-            let translateZ = 0;
+            const isCurrent = offset === 0;
+
+            // Windows Vista Flip 3D cascade mathematics
+            let x = 0;
+            let y = 0;
+            let z = 0;
+            let rotateY = 0;
+            let rotateX = 0;
             let scale = 1;
-            let opacity = 0;
-            let zIndex = 1;
+            let opacity = 1;
+            let zIndex = 10;
 
             if (isCurrent) {
-              translateY = 0;
-              translateZ = 0;
+              x = 0;
+              y = 0;
+              z = 30;
+              rotateY = -12;
+              rotateX = 4;
               scale = 1;
               opacity = 1;
               zIndex = 10;
-            } else if (isNext) {
-              translateY = 16;
-              translateZ = -40;
-              scale = 0.94;
+            } else if (offset === 1) {
+              // 1 step back in cascade
+              x = 28;
+              y = -18;
+              z = -60;
+              rotateY = -18;
+              rotateX = 6;
+              scale = 0.92;
               opacity = 0.65;
-              zIndex = 5;
-            } else if (isPrevious) {
-              translateY = 30;
-              translateZ = -80;
-              scale = 0.88;
+              zIndex = 6;
+            } else {
+              // 2 steps back in cascade
+              x = 54;
+              y = -34;
+              z = -130;
+              rotateY = -24;
+              rotateX = 8;
+              scale = 0.84;
               opacity = 0.35;
-              zIndex = 2;
+              zIndex = 3;
             }
 
             return (
               <motion.div
                 key={item.id}
                 animate={{
-                  y: translateY,
-                  z: translateZ,
-                  scale: scale,
-                  opacity: opacity
+                  x,
+                  y,
+                  z,
+                  rotateY,
+                  rotateX,
+                  scale,
+                  opacity
                 }}
                 transition={{
                   type: "spring",
-                  stiffness: 300,
-                  damping: 26
+                  stiffness: 260,
+                  damping: 24,
+                  mass: 0.8
                 }}
                 onClick={() => setActiveIdx(idx)}
                 className="deck-3d-card position-absolute w-100"
                 style={{
-                  top: 0,
+                  top: 15,
                   left: 0,
                   zIndex,
                   transformStyle: "preserve-3d",
                   cursor: "pointer",
                   boxShadow: isCurrent 
-                    ? "0 15px 40px rgba(0, 210, 255, 0.25), 0 10px 30px rgba(0,0,0,0.8)" 
+                    ? "0 20px 45px rgba(0, 210, 255, 0.3), -10px 15px 35px rgba(0,0,0,0.85)" 
                     : "0 10px 25px rgba(0,0,0,0.7)"
                 }}
               >
