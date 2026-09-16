@@ -120,9 +120,10 @@ export default function PresentationDeck() {
         return;
       }
 
+      // Check if user is scrolling inside an element
       const touchEndY = e.changedTouches[0].clientY;
       const diff = touchStartY.current - touchEndY;
-      if (Math.abs(diff) > 40) {
+      if (Math.abs(diff) > 75) {
         if (diff > 0) {
           nextSlide(true);
         } else {

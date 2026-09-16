@@ -54,46 +54,46 @@ export default function SlideContact() {
         </motion.div>
 
         <div className="row g-4 align-items-stretch">
-          {/* Left Column: Flies in from the LEFT */}
+          {/* Left Column: Flies in from the LEFT (Compact info list on mobile) */}
           <motion.div 
-            className="col-lg-5 d-flex flex-column justify-content-between"
+            className="col-lg-5 d-flex flex-column justify-content-between mb-3 mb-lg-0"
             initial={{ opacity: 0, x: -70 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.42, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div className="deck-3d-card p-3 p-md-4 mb-3" style={{ background: "rgba(6, 14, 32, 0.85)" }}>
+            <div className="deck-3d-card p-2 p-md-4 mb-2 mb-md-3" style={{ background: "rgba(6, 14, 32, 0.85)" }}>
               <div className="d-flex align-items-center gap-3">
-                <div className="deck-card-icon mb-0" style={{ width: 44, height: 44, borderRadius: 8, flexShrink: 0 }}>
-                  <Mail size={20} />
+                <div className="deck-card-icon mb-0" style={{ width: 38, height: 38, borderRadius: 8, flexShrink: 0 }}>
+                  <Mail size={18} />
                 </div>
                 <div>
-                  <div style={{ fontFamily: "var(--deck-font-mono)", fontSize: "0.72rem", color: "var(--deck-blue-bright)", letterSpacing: "0.1em" }}>
+                  <div style={{ fontFamily: "var(--deck-font-mono)", fontSize: "0.68rem", color: "var(--deck-blue-bright)", letterSpacing: "0.1em" }}>
                     OFFICIAL INQUIRIES
                   </div>
-                  <div style={{ color: "#fff", fontWeight: 700, fontSize: "1rem" }}>
+                  <div style={{ color: "#fff", fontWeight: 700, fontSize: "0.92rem" }}>
                     contact@88stechnologies.com
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="deck-3d-card p-3 p-md-4 mb-3" style={{ background: "rgba(6, 14, 32, 0.85)" }}>
+            <div className="deck-3d-card p-2 p-md-4 mb-2 mb-md-3" style={{ background: "rgba(6, 14, 32, 0.85)" }}>
               <div className="d-flex align-items-center gap-3">
-                <div className="deck-card-icon mb-0" style={{ width: 44, height: 44, borderRadius: 8, flexShrink: 0 }}>
-                  <Globe size={20} />
+                <div className="deck-card-icon mb-0" style={{ width: 38, height: 38, borderRadius: 8, flexShrink: 0 }}>
+                  <Globe size={18} />
                 </div>
                 <div>
-                  <div style={{ fontFamily: "var(--deck-font-mono)", fontSize: "0.72rem", color: "var(--deck-blue-bright)", letterSpacing: "0.1em" }}>
+                  <div style={{ fontFamily: "var(--deck-font-mono)", fontSize: "0.68rem", color: "var(--deck-blue-bright)", letterSpacing: "0.1em" }}>
                     DEVELOPER REPOSITORY
                   </div>
-                  <div style={{ color: "#fff", fontWeight: 700, fontSize: "1rem" }}>
+                  <div style={{ color: "#fff", fontWeight: 700, fontSize: "0.92rem" }}>
                     88's Technologies Inc. on App Store
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="reference-badge-box w-100 py-3 text-center mt-auto" style={{ background: "rgba(4, 10, 24, 0.95)" }}>
+            <div className="reference-badge-box w-100 py-2 py-md-3 text-center mt-2 mt-md-auto d-none d-md-block" style={{ background: "rgba(4, 10, 24, 0.95)" }}>
               <span className="reference-badge-text" style={{ fontSize: "1.1rem" }}>
                 INNOVATE &bull; SCALE &bull; SHIP
               </span>

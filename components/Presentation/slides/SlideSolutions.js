@@ -282,10 +282,10 @@ export default function SlideProducts({ onNext }) {
               </div>
             </motion.div>
 
-            {/* Right: Mockups / Screenshots enters from RIGHT */}
+            {/* Right: Mockups / Screenshots enters from RIGHT (Hidden on small mobile screens to prevent cramped cards) */}
             <motion.div 
               key={`right-${currentProd.id}`}
-              className="col-lg-6 d-flex align-items-center justify-content-center gap-3 overflow-hidden" 
+              className="col-lg-6 d-none d-lg-flex align-items-center justify-content-center gap-3 overflow-hidden" 
               style={{ perspective: 800 }}
               initial={{ opacity: 0, x: 50, scale: 0.94 }}
               animate={{ opacity: 1, x: 0, scale: 1 }}

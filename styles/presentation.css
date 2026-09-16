@@ -860,29 +860,30 @@ html, body {
     display: none !important;
   }
 
-  /* 3. Slide Viewport: adjust padding & allow internal vertical scroll if needed */
+  /* 3. Slide Viewport: clean spacing & enable internal smooth scroll */
   .deck-slide {
-    padding: 16px 14px 44px 14px !important;
+    padding: 12px 14px 44px 14px !important;
     overflow-y: auto !important;
     -webkit-overflow-scrolling: touch !important;
     align-items: flex-start !important;
   }
 
   .deck-slide > div {
-    min-height: 100%;
-    padding-top: 10px;
-    padding-bottom: 20px;
+    min-height: auto !important;
+    padding-top: 8px !important;
+    padding-bottom: 24px !important;
   }
 
   /* 4. Make "Scroll To Explore" a tiny line fixed right at the bottom edge */
   .deck-scroll-explore-hint {
     bottom: calc(env(safe-area-inset-bottom, 0px) + 6px) !important;
     gap: 0 !important;
-    padding: 3px 12px !important;
-    background: rgba(4, 10, 24, 0.75) !important;
+    padding: 4px 14px !important;
+    background: rgba(4, 10, 24, 0.85) !important;
     border-radius: 20px !important;
-    border: 1px solid rgba(0, 210, 255, 0.3) !important;
-    backdrop-filter: blur(8px) !important;
+    border: 1px solid rgba(0, 210, 255, 0.35) !important;
+    backdrop-filter: blur(10px) !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6) !important;
   }
 
   .deck-mouse-icon {
@@ -901,10 +902,10 @@ html, body {
     display: none !important;
   }
 
-  /* 6. Slide 1 (Hero): Prevent overflow and hide bulky decorative elements */
+  /* 6. Slide 1 (Hero): Compact layout */
   .reference-pointer-container {
-    gap: 0.6rem !important;
-    margin-bottom: 0.5rem !important;
+    gap: 0.5rem !important;
+    margin-bottom: 0.4rem !important;
   }
 
   .reference-pointer-tag {
@@ -912,56 +913,113 @@ html, body {
   }
 
   .reference-arrow-svg {
-    width: 60px !important;
-    height: 28px !important;
+    width: 55px !important;
+    height: 26px !important;
   }
 
-  /* Hide huge speedometer and badge on mobile hero so text & image fit nicely */
   .hud-speedometer,
   .reference-badge-hero {
     display: none !important;
   }
 
-  .reference-badge-box {
-    padding: 0.4rem 1.2rem !important;
-  }
-
-  .reference-badge-text {
-    font-size: 1.1rem !important;
-  }
-
   .visual-image-layer {
-    max-width: 200px !important;
-    max-height: 200px !important;
+    max-width: 190px !important;
+    max-height: 190px !important;
     margin: 0 auto;
   }
 
-  /* 7. Slide 2 (Services): 1 column with tighter padding */
+  /* 7. Slide 2 (Services): Compact & spacious cards */
   .deck-grid-cols {
     grid-template-columns: 1fr !important;
-    gap: 14px !important;
+    gap: 10px !important;
   }
 
   .deck-3d-card {
-    padding: 18px 16px !important;
+    padding: 14px 14px !important;
     transform: none !important;
   }
 
+  .deck-3d-card h3 {
+    font-size: 1.05rem !important;
+    margin-bottom: 6px !important;
+  }
+
+  .deck-3d-card p {
+    font-size: 0.85rem !important;
+    line-height: 1.45 !important;
+  }
+
+  .deck-3d-card div[style*="marginTop: 24px"],
+  .deck-3d-card div[style*="margin-top: 24px"] {
+    margin-top: 10px !important;
+  }
+
   .deck-card-icon {
-    width: 42px !important;
-    height: 42px !important;
-    margin-bottom: 12px !important;
+    width: 32px !important;
+    height: 32px !important;
+    margin-bottom: 6px !important;
   }
 
-  /* 8. Slide 3 (Products): Stacked cleanly, compact screenshots */
+  .deck-card-icon svg {
+    width: 18px !important;
+    height: 18px !important;
+  }
+
+  /* 8. Slide 3 (Products): Clean single column layout */
   .product-timer-container {
-    margin-top: 6px !important;
-    margin-bottom: 16px !important;
+    margin-top: 4px !important;
+    margin-bottom: 10px !important;
   }
 
-  /* 9. General typography clamp fix for narrow screens */
+  /* 9. Slide 4 (Contact): Compact form & clean spacing */
+  .deck-contact-card {
+    padding: 16px 14px !important;
+  }
+
+  .deck-input-group {
+    gap: 3px !important;
+  }
+
+  .deck-input-label {
+    font-size: 0.7rem !important;
+    margin-bottom: 0 !important;
+  }
+
+  .deck-input-field,
+  .deck-textarea-field {
+    padding: 8px 10px 8px 34px !important;
+    font-size: 0.84rem !important;
+  }
+
+  .deck-input-icon,
+  .deck-textarea-icon {
+    left: 10px !important;
+  }
+
+  .deck-textarea-field {
+    min-height: 60px !important;
+    max-height: 85px !important;
+  }
+
+  .deck-submit-btn {
+    padding: 9px 14px !important;
+    font-size: 0.78rem !important;
+    margin-top: 4px !important;
+  }
+
+  /* General typography clamp for mobile */
   h2 {
-    font-size: 1.8rem !important;
+    font-size: 1.5rem !important;
+    margin-bottom: 8px !important;
+  }
+
+  .reference-badge-box {
+    padding: 0.25rem 0.8rem !important;
+  }
+
+  .reference-badge-text {
+    font-size: 0.85rem !important;
   }
 }
+
 
