@@ -31,10 +31,10 @@ const ContactInfo = () => {
             <div className="content">
               <h4>E-mail</h4>
               <p>
-                <a href="mailto:@gmail.com">info@88stechnologies.com </a>
+                <a href="mailto:info@88stechnologies.com">info@88stechnologies.com </a>
               </p>
               <p>
-                <a href="mailto:@gmail.com.com">support@88stechnologies.com</a>
+                <a href="mailto:support@88stechnologies.com">support@88stechnologies.com</a>
               </p>
             </div>
           </div>
@@ -49,7 +49,7 @@ const ContactInfo = () => {
             <div className="content">
               <h4>Location</h4>
               <p>
-                1225 Oxbow way,<span>Coquitlam, Canada. &nbsp; &nbsp; &nbsp;</span>
+                1224 Oxbow Way,<span>Coquitlam, BC V3E 1M9, Canada.</span>
               </p>
             </div>
           </div>

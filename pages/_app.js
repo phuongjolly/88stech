@@ -24,6 +24,12 @@ function MyApp({ Component, pageProps }) {
       <Head>
         <title>88's Technologies | Accelerating The Future</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width, viewport-fit=cover" />
+        <meta
+          name="description"
+          content="88's Technologies Inc. — independent software company in Coquitlam, BC, Canada, building mobile apps, games, and AI-driven experiences including QuestMandarin."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="88's Technologies" />
       </Head>
 
       <Component {...pageProps} />
