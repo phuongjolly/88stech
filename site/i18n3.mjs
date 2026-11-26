@@ -19,8 +19,8 @@ export const ui3 = {
   apps: { ms: "Aplikasi", fil: "Mga app" },
   contact: { ms: "Hubungi", fil: "Makipag-ugnayan" },
   about: {
-    ms: "Syarikat perisian bebas di Coquitlam, British Columbia, Kanada. Kami membina aplikasi kecil yang mesra untuk menjadikan belajar dan bermain lebih menyeronokkan.",
-    fil: "Isang independent na software company sa Coquitlam, British Columbia, Canada. Gumagawa kami ng maliliit at friendly na app para mas masaya ang pag-aaral at paglalaro.",
+    ms: "Syarikat perisian bebas di Kanada. Kami membina aplikasi kecil yang mesra untuk menjadikan belajar dan bermain lebih menyeronokkan.",
+    fil: "Isang independent na software company sa Canada. Gumagawa kami ng maliliit at friendly na app para mas masaya ang pag-aaral at paglalaro.",
   },
   dlOn: { ms: "Muat turun di", fil: "I-download sa" },
   getOn: { ms: "Dapatkan di", fil: "Kunin sa" },
