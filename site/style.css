@@ -36,8 +36,9 @@ h2{font-size:clamp(28px,4vw,40px);margin:8px 0 20px}
 .lang summary::-webkit-details-marker{display:none}
 .lang summary::after{content:"";width:7px;height:7px;border-right:2px solid;border-bottom:2px solid;transform:rotate(45deg) translateY(-2px)}
 .lang summary:hover{background:var(--ink);color:var(--bg)}
-.lang ul{position:absolute;right:0;top:calc(100% + 6px);list-style:none;margin:0;padding:6px;background:var(--panel);border:1px solid var(--line);border-radius:16px;box-shadow:0 12px 30px -12px rgba(40,10,40,.35);min-width:160px;z-index:10}
-.lang li a{display:block;padding:9px 12px;border-radius:10px;text-decoration:none;font-weight:700}
+.lang ul{position:absolute;right:0;top:calc(100% + 6px);list-style:none;margin:0;padding:6px;background:var(--panel);border:1px solid var(--line);border-radius:16px;box-shadow:0 12px 30px -12px rgba(40,10,40,.35);min-width:min(340px,calc(100vw - 32px));z-index:10;max-height:min(70vh,560px);overflow-y:auto;display:grid;grid-template-columns:1fr 1fr;gap:2px}
+@media(max-width:480px){.lang ul{grid-template-columns:1fr}}
+.lang li a{display:block;white-space:nowrap;padding:9px 12px;border-radius:10px;text-decoration:none;font-weight:700}
 .lang li a:hover,.lang li a[aria-current]{background:var(--hero)}
 @media(max-width:860px){.navlinks{display:none}.lang{margin-left:auto}}
 .hero{background:var(--hero);overflow:hidden}
