@@ -13,6 +13,6 @@ Build locally (Node 20+, no dependencies):
 node site/build.mjs site/img _site && cp site/static/* _site/
 ```
 
-English is served at `/`, other languages at `/vi/`, `/zh/`, `/ja/`, `/ko/`, `/es/`.
+English is served at `/`; vi, zh, tw, ja, ko, es, th, id, fr, de, pt, ru, tr, it, ms and fil each have their own folder (17 languages).
 The build also writes `sitemap.xml` (with hreflang alternates) and `robots.txt`.
 Pushing to `main` deploys via `.github/workflows/pages.yml`.

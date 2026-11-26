@@ -6,13 +6,14 @@ import path from "node:path";
 import { apps as baseApps, company } from "./data.mjs";
 import { LANGS as L1, ui as ui1, appText as at1 } from "./i18n.mjs";
 import { LANGS2, ui2, appText2 } from "./i18n2.mjs";
-const LANGS = [...L1, ...LANGS2];
-const ui = Object.fromEntries(Object.keys(ui1).map((k) => [k, { ...ui1[k], ...(ui2[k] || {}) }]));
+import { LANGS3, ui3, appText3 } from "./i18n3.mjs";
+const LANGS = [...L1, ...LANGS2, ...LANGS3];
+const ui = Object.fromEntries(Object.keys(ui1).map((k) => [k, { ...ui1[k], ...(ui2[k] || {}), ...(ui3[k] || {}) }]));
 const appText = Object.fromEntries(Object.keys(at1).map((s) => {
-  const a = at1[s], b = appText2[s] || {};
+  const a = at1[s], b = appText2[s] || {}, c = appText3[s] || {};
   const o = {};
-  for (const k of ["name", "short", "kind", "tagline"]) o[k] = { ...a[k], ...(b[k] || {}) };
-  o.features = a.features.map((f, i) => ({ ...f, ...((b.features || [])[i] || {}) }));
+  for (const k of ["name", "short", "kind", "tagline"]) o[k] = { ...a[k], ...(b[k] || {}), ...(c[k] || {}) };
+  o.features = a.features.map((f, i) => ({ ...f, ...((b.features || [])[i] || {}), ...((c.features || [])[i] || {}) }));
   return [s, o];
 }));
 
@@ -105,7 +106,7 @@ ${alts}
 <meta property="og:description" content="${esc(desc)}">
 <meta property="og:url" content="${urlOf(L, page)}">
 <meta property="og:image" content="${ogImg}">
-<meta property="og:locale" content="${{ vi: "vi_VN", en: "en_US", zh: "zh_CN", tw: "zh_TW", ja: "ja_JP", ko: "ko_KR", es: "es_ES", th: "th_TH", id: "id_ID", fr: "fr_FR", de: "de_DE", pt: "pt_BR", ru: "ru_RU", tr: "tr_TR", it: "it_IT" }[L]}">
+<meta property="og:locale" content="${{ vi: "vi_VN", en: "en_US", zh: "zh_CN", tw: "zh_TW", ja: "ja_JP", ko: "ko_KR", es: "es_ES", th: "th_TH", id: "id_ID", fr: "fr_FR", de: "de_DE", pt: "pt_BR", ru: "ru_RU", tr: "tr_TR", it: "it_IT", ms: "ms_MY", fil: "fil_PH" }[L]}">
 <meta name="twitter:card" content="summary_large_image">
 ${app?.ios && !app.tvOnly ? `<meta name="apple-itunes-app" content="app-id=${app.ios.match(/id(\d+)/)[1]}">\n` : ""}<link rel="icon" href="${up}favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
