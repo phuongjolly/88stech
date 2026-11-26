@@ -1,10 +1,7 @@
 // App data, taken from the App Store / Google Play listings (Nov 2026).
 export const company = {
   name: "88's Technologies Inc.",
-  address: "1224 Oxbow Way, Coquitlam, BC V3E 1M9, Canada",
   email: "info@88stechnologies.com",
-  phone: "+1 (778) 231-6571",
-  tel: "+17782316571",
 };
 
 export const apps = [

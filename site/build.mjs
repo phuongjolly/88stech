@@ -74,7 +74,7 @@ function render(L, page, app) {
   const desc = app ? (app.tagline[L] ?? app.tagline.en) : ui.heroLead[L];
   const ogImg = app ? abs(app, imgs[app.slug].icon) : abs(apps[2], imgs[apps[2].slug].shots[0]);
   const alts = LANGS.map(([l]) => `<link rel="alternate" hreflang="${hl(l)}" href="${urlOf(l, page)}">`).join("\n") + `\n<link rel="alternate" hreflang="x-default" href="${urlOf(DEFAULT, page)}">`;
-  const org = { "@type": "Organization", name: company.name, url: SITE, email: company.email, telephone: company.phone, address: { "@type": "PostalAddress", streetAddress: "1224 Oxbow Way", addressLocality: "Coquitlam", addressRegion: "BC", postalCode: "V3E 1M9", addressCountry: "CA" } };
+  const org = { "@type": "Organization", name: company.name, url: SITE, email: company.email };
   const appLd = (a) => ({
     "@type": "MobileApplication", name: nm(a), alternateName: a.name.en, description: a.tagline[L] ?? a.tagline.en,
     operatingSystem: [a.ios && (a.tvOnly ? "tvOS" : "iOS"), a.android && "Android"].filter(Boolean).join(", "),
@@ -125,7 +125,7 @@ ${langMenu}
   const foot = `<footer class="foot"><div class="wrap footin">
 <div><a class="logo" href="index.html"><span class="mark">88</span><span>88's Technologies</span></a><p>${u("about")}</p></div>
 <div><h3>${u("apps")}</h3><ul>${apps.map((a) => `<li><a href="${a.slug}.html">${tx(a.short)}</a></li>`).join("")}</ul></div>
-<div><h3>${u("contact")}</h3><ul><li><a href="mailto:${company.email}">${company.email}</a></li><li><a href="tel:${company.tel}">${company.phone}</a></li><li>${esc(company.address)}</li></ul></div>
+<div><h3>${u("contact")}</h3><ul><li><a href="mailto:${company.email}">${company.email}</a></li></ul></div>
 </div><div class="wrap copy">© 2026 ${esc(company.name)}</div></footer>
 <script>{document.querySelectorAll('[data-setlang]').forEach(a=>a.addEventListener('click',()=>{try{localStorage.setItem('lang',a.dataset.setlang)}catch(e){}}))}</script>
 </body></html>`;
