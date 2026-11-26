@@ -94,6 +94,21 @@ function render(L, page, app) {
 <html lang="${hl(L)}">
 <head>
 <meta charset="utf-8">
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-K93V6LJG');</script>
+<!-- End Google Tag Manager -->
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TB140GED1R"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-TB140GED1R');
+</script>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="claude:viewport-fit-sides" content="cover">
 <title>${esc(title)}</title>
@@ -114,7 +129,11 @@ ${app?.ios && !app.tvOnly ? `<meta name="apple-itunes-app" content="app-id=${app
 <link rel="stylesheet" href="${up}style.css">
 <script type="application/ld+json">${JSON.stringify(ld).replace(/</g, "\\u003c")}</script>
 ${L === DEFAULT && page === "index.html" ? `<script>try{var s=localStorage.getItem('lang'),nl=(navigator.language||'').toLowerCase(),n=/^zh-(tw|hk|mo|hant)/.test(nl)?'tw':nl.slice(0,2),ok=${JSON.stringify(LANGS.map(([l]) => l))};var t=s||(ok.indexOf(n)>=0?n:'en');if(t!=='en'&&!/bot|crawl|spider/i.test(navigator.userAgent))location.replace(t+'/')}catch(e){}</script>\n` : ""}</head>
-<body>`;
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K93V6LJG"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->`;
 
   const nav = `<header class="top"><div class="wrap topin">
 <a class="logo" href="index.html"><span class="mark">88</span><span>88's Technologies</span></a>
